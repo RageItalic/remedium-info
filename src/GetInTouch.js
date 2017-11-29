@@ -6,7 +6,8 @@ class GetInTouch extends Component {
 		super(props)
 
 		this.state = {
-			email: ''
+			email: '',
+			buttonClicked: false
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -24,7 +25,8 @@ class GetInTouch extends Component {
 		event.preventDefault();
 		fire.database().ref('emails').push(this.state.email)
 		this.setState({
-			email: 'Thank You.'
+			email: 'Thank You.',
+			buttonClicked: true
 		});
 	}
 
@@ -34,14 +36,16 @@ class GetInTouch extends Component {
 			<div className="container">
 				<div className="columns is-centered is-mobile">
 					<div className="field is-grouped is-6-mobile">
-					  <p className="control">
-					    <input className="input" type="text" placeholder="Your Email" value={this.state.email} onChange={this.handleChange}/>
-					  </p>
-					  <p className="control">
-					    <a className="button is-info" onClick={this.handleClick}>
-					      I'm Interested
-					    </a>
-					  </p>
+					    <p className="control">
+					    	<input className="input" type="text" placeholder="Your Email" value={this.state.email} onChange={this.handleChange}/>
+					    </p>
+						{this.state.buttonClicked === false &&
+						  <p className="control">
+						    <a className="button is-info" onClick={this.handleClick}>
+						      I'm Interested
+						    </a>
+						  </p>
+					 	}
 					</div>
 				</div>
 			</div>
